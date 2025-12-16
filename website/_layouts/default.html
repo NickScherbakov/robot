@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="{{ '/' | relative_url }}">🤖 Earning Robot</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#advantages">Advantages</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="https://github.com/NickScherbakov/robot" target="_blank">GitHub</a></li>
+            </ul>
+            <button class="nav-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Earning Robot</h4>
+                    <p>Autonomous earning robot — privacy, ethics, profit.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/NickScherbakov/robot">GitHub Repository</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/tree/main/docs">Documentation</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/issues">Issues</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/blob/main/LICENSE">License</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/NickScherbakov/robot#-quick-start">Quick Start</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/blob/main/docs/API_DOCUMENTATION.md">API Docs</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/blob/main/docs/FAQ.md">FAQ</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/blob/main/CONTRIBUTING.md">Contributing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/NickScherbakov">GitHub Profile</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/issues/new">Report Bug</a></li>
+                        <li><a href="https://github.com/NickScherbakov/robot/issues/new">Request Feature</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Earning Robot. Open source under MIT License.</p>
+                <p>Built with ❤️ for autonomous earning</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
