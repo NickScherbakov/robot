@@ -8,10 +8,10 @@ url: "https://nickscherbakov.github.io"
 
 # Build settings
 markdown: kramdown
-theme: minima
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+# theme: minima
+# plugins:
+#   - jekyll-feed
+#   - jekyll-seo-tag
 
 # Exclude from processing
 exclude:
