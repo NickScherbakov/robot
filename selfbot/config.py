@@ -12,7 +12,7 @@ class SelfBotConfig:
     
     # Scanner settings
     SCAN_INTERVAL = int(os.getenv('SELFBOT_SCAN_INTERVAL', '300'))  # 5 minutes
-    RSS_FEEDS = os.getenv('SELFBOT_RSS_FEEDS', '').split(',') if os.getenv('SELFBOT_RSS_FEEDS') else []
+    RSS_FEEDS = [f for f in os.getenv('SELFBOT_RSS_FEEDS', '').split(',') if f.strip()] or []
     
     # Finance settings
     INITIAL_BUDGET = float(os.getenv('SELFBOT_INITIAL_BUDGET', '10.00'))

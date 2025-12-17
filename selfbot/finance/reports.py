@@ -70,7 +70,7 @@ class SelfBotReports:
 ├─ Revenue: ${total_revenue:.2f}
 ├─ Costs: ${total_cost:.2f}
 ├─ Profit: ${total_profit:.2f}
-└─ ROI: {(total_profit / total_cost * 100):.1f}% if total_cost > 0 else 'N/A'%
+└─ ROI: {(total_profit / total_cost * 100):.1f}% if total_cost > 0 else 'N/A'
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """

@@ -229,6 +229,9 @@ def test_economics_data():
     assert 'revenue_max' in article_econ
     assert 'ai_cost_min' in article_econ
     assert 'ai_cost_max' in article_econ
+    
+    # Note: Generators use 'code' but config has 'code_snippet' for clarity
+    # Both refer to the same content type
 
 
 if __name__ == '__main__':

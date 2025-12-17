@@ -106,14 +106,15 @@ Requirements:
             if line.strip().startswith('```'):
                 in_code_block = not in_code_block
                 continue
-            if in_code_block or not any(line.strip().startswith(marker) for marker in ['#', '//', '/*', '*']):
+            if in_code_block:
                 code_lines.append(line)
         
-        # If no code block markers found, return as-is
-        if not code_lines:
-            return response
+        # If code block markers were found, return extracted code
+        if code_lines:
+            return '\n'.join(code_lines).strip()
         
-        return '\n'.join(code_lines).strip()
+        # Otherwise, return response as-is
+        return response
     
     def _assess_code_quality(self, code: str, language: str) -> float:
         """

@@ -12,9 +12,14 @@ logger = logging.getLogger(__name__)
 class BaseGenerator(ABC):
     """Base class for all content generators"""
     
-    def __init__(self, name: str, ai_provider=None):
+    def __init__(self, name: str):
+        """
+        Initialize base generator.
+        
+        Args:
+            name: Generator name for logging
+        """
         self.name = name
-        self.ai_provider = ai_provider
         logger.info(f"Initialized generator: {name}")
     
     @abstractmethod

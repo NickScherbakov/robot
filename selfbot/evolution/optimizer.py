@@ -81,7 +81,8 @@ class StrategyOptimizer:
             provider = features.get('ai_provider', 'unknown')
             profit = pattern.get('profit', 0)
             
-            key = f"{ctype}_{provider}"
+            # Use tuple as key to avoid string parsing issues
+            key = (ctype, provider)
             if key not in provider_performance:
                 provider_performance[key] = {
                     'count': 0,
@@ -94,9 +95,8 @@ class StrategyOptimizer:
         # Calculate averages and make recommendations
         recommendations = {}
         
-        for key, stats in provider_performance.items():
+        for (ctype, provider), stats in provider_performance.items():
             if stats['count'] > 2:  # Need at least 3 samples
-                ctype, provider = key.rsplit('_', 1)
                 avg_profit = stats['total_profit'] / stats['count']
                 
                 if ctype not in recommendations or avg_profit > recommendations[ctype]['avg_profit']:
