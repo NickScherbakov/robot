@@ -1,0 +1,73 @@
+<svg width="1280" height="640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bgGradient)"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  </pattern>
+  <rect width="1280" height="640" fill="url(#gridPattern)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="1100" cy="150" r="80" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="200" cy="500" r="60" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="1150" cy="550" r="40" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Robot icon -->
+  <g transform="translate(200, 180)" filter="url(#shadow)">
+    <circle cx="80" cy="80" r="75" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="80" cy="80" r="65" fill="white"/>
+    <circle cx="65" cy="70" r="8" fill="#667eea"/>
+    <circle cx="95" cy="70" r="8" fill="#667eea"/>
+    <rect x="55" y="95" width="50" height="5" rx="2.5" fill="#667eea"/>
+    <rect x="45" y="35" width="15" height="25" rx="5" fill="#764ba2"/>
+    <rect x="95" y="35" width="15" height="25" rx="5" fill="#764ba2"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="380" y="280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+        font-size="96" font-weight="800" fill="white">
+    Earning Robot
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="380" y="350" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+        font-size="42" font-weight="400" fill="rgba(255,255,255,0.95)">
+    Autonomous AI-Powered Income Generation
+  </text>
+  
+  <!-- Features -->
+  <g transform="translate(380, 420)">
+    <rect width="180" height="50" rx="25" fill="rgba(255,255,255,0.2)"/>
+    <text x="90" y="33" font-family="sans-serif" font-size="22" font-weight="600" 
+          fill="white" text-anchor="middle">🤖 AI Powered</text>
+  </g>
+  
+  <g transform="translate(580, 420)">
+    <rect width="190" height="50" rx="25" fill="rgba(255,255,255,0.2)"/>
+    <text x="95" y="33" font-family="sans-serif" font-size="22" font-weight="600" 
+          fill="white" text-anchor="middle">💰 Automated</text>
+  </g>
+  
+  <g transform="translate(790, 420)">
+    <rect width="170" height="50" rx="25" fill="rgba(255,255,255,0.2)"/>
+    <text x="85" y="33" font-family="sans-serif" font-size="22" font-weight="600" 
+          fill="white" text-anchor="middle">🔒 Secure</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="640" y="580" font-family="sans-serif" font-size="28" font-weight="500" 
+        fill="rgba(255,255,255,0.9)" text-anchor="middle">
+    github.com/NickScherbakov/robot
+  </text>
+</svg>
