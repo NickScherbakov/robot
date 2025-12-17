@@ -474,6 +474,21 @@ Contributions are welcome! Please:
 - GitHub Issues: [Report a bug](https://github.com/NickScherbakov/robot/issues)
 - Documentation: See `docs/` folder
 
+## 🌐 Demonstration Website
+
+Visit our interactive demonstration website to learn more about the Earning Robot:
+
+**Live Demo:** [https://nickscherbakov.github.io/robot/](https://nickscherbakov.github.io/robot/)
+
+The website features:
+- 🎯 Complete project overview and mission statement
+- 🏗️ Interactive architecture diagrams
+- ✨ Live demo panel with simulated AI interactions
+- 📊 Real-time financial flow visualization
+- 🚀 Quick start guides and documentation links
+
+The website source code is in the `/website` directory and is automatically deployed to GitHub Pages when changes are pushed to the main branch.
+
 ## 🎯 Roadmap
 
 - [ ] Add more AI providers (Claude, Gemini)

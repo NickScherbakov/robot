@@ -1,0 +1,90 @@
+<!-- Architecture Diagram SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <style>
+      .box { fill: #f5f7fa; stroke: #4CAF50; stroke-width: 2; }
+      .box-primary { fill: #4CAF50; stroke: #45a049; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 14px; fill: #333; }
+      .text-white { font-family: Arial, sans-serif; font-size: 14px; fill: white; }
+      .title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+      .arrow { stroke: #4CAF50; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4CAF50" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" class="title" text-anchor="middle">Earning Robot Architecture</text>
+  
+  <!-- User Layer -->
+  <rect x="50" y="60" width="200" height="80" class="box" rx="5"/>
+  <text x="150" y="85" class="text" text-anchor="middle">👤 User</text>
+  <text x="150" y="105" class="text" text-anchor="middle">Telegram Bot</text>
+  <text x="150" y="125" class="text" text-anchor="middle">REST API</text>
+  
+  <rect x="550" y="60" width="200" height="80" class="box" rx="5"/>
+  <text x="650" y="85" class="text" text-anchor="middle">👑 Owner</text>
+  <text x="650" y="105" class="text" text-anchor="middle">Dashboard</text>
+  <text x="650" y="125" class="text" text-anchor="middle">Reports</text>
+  
+  <!-- Arrows from users to core -->
+  <path d="M 150 140 L 150 200" class="arrow"/>
+  <path d="M 650 140 L 650 200" class="arrow"/>
+  
+  <!-- Core System -->
+  <rect x="100" y="200" width="600" height="180" class="box-primary" rx="5"/>
+  <text x="400" y="225" class="text-white" text-anchor="middle" font-size="18" font-weight="bold">🤖 EARNING ROBOT CORE</text>
+  
+  <!-- Core Components -->
+  <rect x="120" y="240" width="160" height="50" class="box" rx="3"/>
+  <text x="200" y="265" class="text" text-anchor="middle">🧠 AI Manager</text>
+  <text x="200" y="280" class="text" text-anchor="middle" font-size="11">OpenAI | Mistral</text>
+  
+  <rect x="320" y="240" width="160" height="50" class="box" rx="3"/>
+  <text x="400" y="265" class="text" text-anchor="middle">💳 Payment</text>
+  <text x="400" y="280" class="text" text-anchor="middle" font-size="11">Stripe Integration</text>
+  
+  <rect x="520" y="240" width="160" height="50" class="box" rx="3"/>
+  <text x="600" y="265" class="text" text-anchor="middle">📊 Reporting</text>
+  <text x="600" y="280" class="text" text-anchor="middle" font-size="11">Analytics & Logs</text>
+  
+  <rect x="220" y="310" width="160" height="50" class="box" rx="3"/>
+  <text x="300" y="335" class="text" text-anchor="middle">📅 Scheduler</text>
+  <text x="300" y="350" class="text" text-anchor="middle" font-size="11">Automated Tasks</text>
+  
+  <rect x="420" y="310" width="160" height="50" class="box" rx="3"/>
+  <text x="500" y="335" class="text" text-anchor="middle">🗄️ Database</text>
+  <text x="500" y="350" class="text" text-anchor="middle" font-size="11">SQLite Storage</text>
+  
+  <!-- Arrows from core to external services -->
+  <path d="M 200 380 L 200 450" class="arrow"/>
+  <path d="M 400 380 L 400 450" class="arrow"/>
+  <path d="M 600 380 L 600 450" class="arrow"/>
+  
+  <!-- External Services -->
+  <rect x="120" y="450" width="160" height="60" class="box" rx="5"/>
+  <text x="200" y="475" class="text" text-anchor="middle">🧠 AI APIs</text>
+  <text x="200" y="495" class="text" text-anchor="middle" font-size="11">OpenAI</text>
+  <text x="200" y="508" class="text" text-anchor="middle" font-size="11">Mistral AI</text>
+  
+  <rect x="320" y="450" width="160" height="60" class="box" rx="5"/>
+  <text x="400" y="475" class="text" text-anchor="middle">💰 Stripe</text>
+  <text x="400" y="495" class="text" text-anchor="middle" font-size="11">Payment</text>
+  <text x="400" y="508" class="text" text-anchor="middle" font-size="11">Processing</text>
+  
+  <rect x="520" y="450" width="160" height="60" class="box" rx="5"/>
+  <text x="600" y="475" class="text" text-anchor="middle">💬 Telegram</text>
+  <text x="600" y="495" class="text" text-anchor="middle" font-size="11">Bot API</text>
+  <text x="600" y="508" class="text" text-anchor="middle" font-size="11">Notifications</text>
+  
+  <!-- Flow indicators -->
+  <text x="150" y="170" class="text" text-anchor="middle" font-size="12">Request ↓</text>
+  <text x="650" y="170" class="text" text-anchor="middle" font-size="12">Monitor ↓</text>
+  <text x="200" y="425" class="text" text-anchor="middle" font-size="12">Process ↓</text>
+  <text x="400" y="425" class="text" text-anchor="middle" font-size="12">Charge ↓</text>
+  <text x="600" y="425" class="text" text-anchor="middle" font-size="12">Notify ↓</text>
+  
+  <!-- Legend -->
+  <text x="50" y="560" class="text" font-size="12">💰 Revenue Flow | 📊 Data Flow | 🔄 Automated Processes</text>
+</svg>
