@@ -53,6 +53,7 @@ Available commands:
 /status - Check robot status
 /report - Get financial report
 /settings - Configure settings
+/selfbot - SelfEarnBot control (autonomous earning)
 
 Let's get started! What would you like to do?
 """
@@ -264,6 +265,134 @@ Let's get started! What would you like to do?
                 f"Mistral: {mistral_status}"
             )
     
+    async def selfbot_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /selfbot command - SelfEarnBot control"""
+        user = update.effective_user
+        
+        if not self.is_owner(user.id):
+            await update.message.reply_text("❌ This command is only available to the owner")
+            return
+        
+        help_text = """
+🤖 SelfEarnBot - AI Content Arbitrage Bot
+
+Available commands:
+/selfbot_start - Start SelfBot autonomous operation
+/selfbot_stop - Stop SelfBot
+/selfbot_status - Check SelfBot status
+/selfbot_stats - Get earnings statistics
+/selfbot_report - Get detailed report
+/selfbot_budget <amount> - Set budget
+
+ℹ️ SelfBot automatically finds content opportunities, generates content with AI, and earns money through content arbitrage.
+"""
+        await update.message.reply_text(help_text)
+    
+    async def selfbot_status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /selfbot_status command"""
+        user = update.effective_user
+        
+        if not self.is_owner(user.id):
+            await update.message.reply_text("❌ This command is only available to the owner")
+            return
+        
+        try:
+            from selfbot.database import SelfBotDatabase
+            from selfbot.finance import SelfBotReports
+            from selfbot.config import SelfBotConfig
+            
+            db = SelfBotDatabase(SelfBotConfig.DATABASE_PATH).initialize()
+            session = db.get_session()
+            reports = SelfBotReports(session)
+            
+            stats = reports.generate_summary_stats()
+            
+            status_text = f"""
+📊 SelfBot Status
+
+💰 Financial Summary:
+├─ Total Revenue: ${stats['total_revenue']:.2f}
+├─ Total Costs: ${stats['total_cost']:.2f}
+├─ Total Profit: ${stats['total_profit']:.2f}
+└─ Avg Profit/Op: ${stats['average_profit_per_operation']:.2f}
+
+📈 Operations:
+├─ Opportunities: {stats['total_opportunities']}
+├─ Content Generated: {stats['total_content_generated']}
+└─ Published: {stats['total_published']}
+
+⚙️ Configuration:
+├─ Initial Budget: ${SelfBotConfig.INITIAL_BUDGET:.2f}
+├─ Auto Reinvest: {'✅' if SelfBotConfig.AUTO_REINVEST else '❌'}
+└─ Scan Interval: {SelfBotConfig.SCAN_INTERVAL}s
+"""
+            
+            await update.message.reply_text(status_text)
+            session.close()
+            db.close()
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Error getting status: {e}")
+    
+    async def selfbot_stats_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /selfbot_stats command"""
+        user = update.effective_user
+        
+        if not self.is_owner(user.id):
+            await update.message.reply_text("❌ This command is only available to the owner")
+            return
+        
+        try:
+            from selfbot.database import SelfBotDatabase
+            from selfbot.finance import SelfBotReports
+            from selfbot.config import SelfBotConfig
+            
+            db = SelfBotDatabase(SelfBotConfig.DATABASE_PATH).initialize()
+            session = db.get_session()
+            reports = SelfBotReports(session)
+            
+            # Get top performing content types
+            top_types = reports.get_top_performing_content_types(limit=3)
+            
+            stats_text = "📊 SelfBot Performance Stats\n\n"
+            stats_text += "🏆 Top Content Types:\n"
+            
+            for i, (ctype, avg_profit) in enumerate(top_types, 1):
+                stats_text += f"{i}. {ctype}: ${avg_profit:.2f} avg profit\n"
+            
+            await update.message.reply_text(stats_text)
+            session.close()
+            db.close()
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Error getting stats: {e}")
+    
+    async def selfbot_report_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /selfbot_report command"""
+        user = update.effective_user
+        
+        if not self.is_owner(user.id):
+            await update.message.reply_text("❌ This command is only available to the owner")
+            return
+        
+        try:
+            from selfbot.database import SelfBotDatabase
+            from selfbot.finance import SelfBotReports
+            from selfbot.config import SelfBotConfig
+            
+            db = SelfBotDatabase(SelfBotConfig.DATABASE_PATH).initialize()
+            session = db.get_session()
+            reports = SelfBotReports(session)
+            
+            report = reports.generate_cycle_report()
+            
+            await update.message.reply_text(f"```\n{report}\n```", parse_mode='Markdown')
+            session.close()
+            db.close()
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Error generating report: {e}")
+    
     async def message_handler(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle regular messages"""
         # Treat regular messages as AI queries
@@ -291,6 +420,13 @@ Let's get started! What would you like to do?
         application.add_handler(CommandHandler("status", self.status_command))
         application.add_handler(CommandHandler("report", self.report_command))
         application.add_handler(CommandHandler("settings", self.settings_command))
+        
+        # SelfBot handlers
+        application.add_handler(CommandHandler("selfbot", self.selfbot_command))
+        application.add_handler(CommandHandler("selfbot_status", self.selfbot_status_command))
+        application.add_handler(CommandHandler("selfbot_stats", self.selfbot_stats_command))
+        application.add_handler(CommandHandler("selfbot_report", self.selfbot_report_command))
+        
         application.add_handler(CallbackQueryHandler(self.button_callback))
         application.add_handler(MessageHandler(
             filters.TEXT & ~filters.COMMAND,
