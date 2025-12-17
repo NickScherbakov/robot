@@ -995,8 +995,9 @@ ul {
 /* Focus styles for keyboard navigation */
 a:focus-visible,
 button:focus-visible {
-    outline: 3px solid var(--primary-color);
+    outline: 3px solid #4299e1;
     outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
 }
 
 /* ============================================
