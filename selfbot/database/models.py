@@ -131,6 +131,7 @@ class LearningRecord(Base):
             'action_type': self.action_type,
             'success': self.success,
             'profit': self.profit,
+            'features': self.features,
             'insights': self.insights
         }
 

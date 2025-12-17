@@ -8,6 +8,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# Cost estimation constants
+DEFAULT_WORDS_PER_TOKEN = 0.75  # Rough estimate: ~750 tokens per 500 words
+DEFAULT_COST_PER_1K_TOKENS = 0.002  # Default cost (Mistral-tiny rate)
+
 
 class BaseGenerator(ABC):
     """Base class for all content generators"""
@@ -53,9 +57,9 @@ class BaseGenerator(ABC):
         """
         # Default estimation based on word count
         word_count = requirements.get('word_count', 500)
-        # Rough estimate: ~750 tokens per 500 words, $0.002 per 1K tokens
-        estimated_tokens = (word_count / 500) * 750
-        estimated_cost = (estimated_tokens / 1000) * 0.002
+        # Estimate tokens based on word count
+        estimated_tokens = word_count * DEFAULT_WORDS_PER_TOKEN
+        estimated_cost = (estimated_tokens / 1000) * DEFAULT_COST_PER_1K_TOKENS
         return round(estimated_cost, 4)
     
     def validate_requirements(self, requirements: Dict) -> bool:

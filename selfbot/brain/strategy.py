@@ -2,9 +2,14 @@
 Earning strategies for different opportunity types.
 """
 from typing import Dict
+from selfbot.config import SelfBotConfig
 import logging
 
 logger = logging.getLogger(__name__)
+
+# Provider selection thresholds (in USD)
+MIN_BUDGET_FOR_OPENAI = 0.02  # Minimum budget to use OpenAI
+MIN_BUDGET_FOR_CODE_OPENAI = 0.02  # Minimum budget for code generation with OpenAI
 
 
 class EarningStrategy:
@@ -109,12 +114,16 @@ class EarningStrategy:
         Returns:
             Provider name ('openai' or 'mistral')
         """
+        # Get typical costs from config
+        economics = SelfBotConfig.ECONOMICS.get(content_type, {})
+        typical_cost = economics.get('ai_cost_max', MIN_BUDGET_FOR_OPENAI)
+        
         # If budget is very low, always use mistral
-        if budget < 0.01:
+        if budget < typical_cost:
             return 'mistral'
         
         # For code, prefer OpenAI if budget allows
-        if content_type == 'code' and budget >= 0.02:
+        if content_type == 'code' and budget >= MIN_BUDGET_FOR_CODE_OPENAI:
             return 'openai'
         
         # For most content, mistral is cost-effective
