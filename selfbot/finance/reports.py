@@ -58,19 +58,19 @@ class SelfBotReports:
 ✍️ CONTENT GENERATION
 ├─ Generated: {len(content)}
 ├─ Approved: {sum(1 for c in content if c.status == 'approved')}
-├─ Average Quality: {sum(c.quality_score or 0 for c in content) / len(content):.2f if content else 0}
+├─ Average Quality: {(sum(c.quality_score or 0 for c in content) / len(content)):.2f if content else 0.00}
 └─ Total Tokens: {sum(c.tokens_used for c in content)}
 
 📤 PUBLISHING
 ├─ Submitted: {len(results)}
 ├─ Successful: {len(successful)}
-└─ Success Rate: {len(successful) / len(results) * 100:.1f}% if results else 0%
+└─ Success Rate: {(len(successful) / len(results) * 100):.1f}% if results else 0.0%
 
 💰 FINANCIALS
 ├─ Revenue: ${total_revenue:.2f}
 ├─ Costs: ${total_cost:.2f}
 ├─ Profit: ${total_profit:.2f}
-└─ ROI: {(total_profit / total_cost * 100):.1f}% if total_cost > 0 else N/A%
+└─ ROI: {(total_profit / total_cost * 100):.1f}% if total_cost > 0 else 'N/A'%
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """

@@ -145,8 +145,9 @@ class SelfBotDatabase:
     
     def initialize(self):
         """Initialize database connection and create tables"""
-        # Ensure data directory exists
-        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+        # Ensure data directory exists (skip for in-memory databases)
+        if self.db_path != ':memory:' and os.path.dirname(self.db_path):
+            os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
         
         # Create engine
         self.engine = create_engine(f'sqlite:///{self.db_path}')
