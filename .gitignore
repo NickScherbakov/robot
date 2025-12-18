@@ -65,3 +65,9 @@ coverage.xml
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# Jekyll build output (from website build)
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
