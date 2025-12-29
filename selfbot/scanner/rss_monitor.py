@@ -117,7 +117,7 @@ class RSSScanner(BaseScanner):
             {
                 'source': 'rss_demo',
                 'source_url': 'https://example.com/content-needed',
-                'title': 'Need article about AI trends in 2024',
+                'title': 'Need article about AI trends in 2025',
                 'description': 'Looking for a comprehensive article discussing the latest AI trends, including LLMs, computer vision, and automation.',
                 'content_type': 'article',
                 'estimated_revenue': 25.00,

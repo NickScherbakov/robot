@@ -1,12 +1,12 @@
 # 🤖 SelfEarnBot - AI Content Arbitrage Bot
 
-## 🎯 Концепция (Concept)
+## 🎯 Concept
 
-**SelfEarnBot** - это автономный бот, который **САМ зарабатывает деньги** без участия человека, используя принципы ТРИЗ (теория решения изобретательских задач) и арбитраж контента.
+**SelfEarnBot** is an autonomous bot that **makes money on its own** without human intervention, using TRIZ principles (Theory of Inventive Problem Solving) and content arbitrage.
 
-### ИКР (Идеальный Конечный Результат)
+### ICR (Ideal Final Result)
 
-> Бот **САМ** находит возможности, **САМ** принимает решения, **САМ** зарабатывает, **САМ** реинвестирует.
+> The bot **INDEPENDENTLY** finds opportunities, **INDEPENDENTLY** makes decisions, **INDEPENDENTLY** earns, **INDEPENDENTLY** reinvests.
 
 ## 🏗️ Архитектура
 

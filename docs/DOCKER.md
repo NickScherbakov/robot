@@ -206,7 +206,7 @@ docker run --rm \
 
 ```bash
 # Extract backup
-tar -xzf backup-20240115.tar.gz
+tar -xzf backup-20250115.tar.gz
 
 # Restart container
 docker-compose restart

@@ -7,6 +7,7 @@ from apscheduler.triggers.cron import CronTrigger
 from backend.config import Config
 from backend.database import Database
 from billing.reporting import ReportGenerator
+from backend.trending import update_openrouter_top_weekly
 import logging
 import requests
 
@@ -125,6 +126,7 @@ class TaskScheduler:
         """Start the scheduler with configured tasks"""
         # Parse report time (format: HH:MM)
         report_hour, report_minute = map(int, Config.REPORT_TIME.split(':'))
+        trend_hour, trend_minute = map(int, Config.TRENDING_UPDATE_TIME.split(':'))
         
         # Daily report at configured time
         self.scheduler.add_job(
@@ -149,15 +151,39 @@ class TaskScheduler:
             id='health_check',
             name='System Health Check'
         )
+
+        # Daily trending models update
+        self.scheduler.add_job(
+            self.update_trending_models,
+            trigger=CronTrigger(hour=trend_hour, minute=trend_minute),
+            id='trending_update',
+            name='Update OpenRouter Top Weekly'
+        )
         
         self.scheduler.start()
         logger.info("📅 Task scheduler started")
         logger.info(f"Daily reports scheduled for {Config.REPORT_TIME} {Config.TIMEZONE}")
+        logger.info(f"Trending updates scheduled for {Config.TRENDING_UPDATE_TIME} {Config.TIMEZONE}")
     
     def stop(self):
         """Stop the scheduler"""
         self.scheduler.shutdown()
         logger.info("Task scheduler stopped")
+
+    def update_trending_models(self):
+        """Fetch and update OpenRouter trending models in docs and notify owner."""
+        logger.info("Updating OpenRouter Top Weekly trending table...")
+        try:
+            updated = update_openrouter_top_weekly()
+            msg = (
+                "✅ Trending table updated from OpenRouter Top Weekly"
+                if updated else
+                "ℹ️ Trending data fetched (no doc changes)"
+            )
+            self.send_telegram_notification(msg)
+        except Exception as e:
+            logger.error(f"Error updating trending models: {e}")
+            self.send_telegram_notification(f"❌ Trending update failed: {e}")
 
 
 if __name__ == '__main__':

@@ -137,7 +137,8 @@ Requirements:
         # Cost per 1K tokens
         cost_rates = {
             'mistral': 0.0002,  # Mistral-tiny
-            'openai': 0.002    # GPT-3.5-turbo
+            'openai': 0.00015,   # GPT-4o-mini
+            'mistral': 0.0002,   # Mistral-small
         }
         
         cost_per_1k = cost_rates.get(ai_provider, 0.002)

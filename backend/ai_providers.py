@@ -33,7 +33,7 @@ class OpenAIProvider(AIProvider):
         else:
             logger.warning("OpenAI API key not configured")
     
-    def generate_response(self, prompt, max_tokens=500, model="gpt-3.5-turbo"):
+    def generate_response(self, prompt, max_tokens=500, model="gpt-4o-mini"):
         """
         Generate response using OpenAI API
         
@@ -53,8 +53,13 @@ class OpenAIProvider(AIProvider):
             )
             
             tokens_used = response.usage.total_tokens
-            # Approximate cost calculation (GPT-3.5-turbo: $0.002 per 1K tokens)
-            cost = (tokens_used / 1000) * 0.002
+            # Approximate cost calculation (2025 models)
+            price_per_1k = {
+                'gpt-4o-mini': 0.0015,
+                'gpt-4o': 0.01,
+                'gpt-3.5-turbo': 0.002,
+            }.get(model, 0.002)
+            cost = (tokens_used / 1000) * price_per_1k
             
             return {
                 'response': response.choices[0].message.content,

@@ -27,7 +27,7 @@ GET /health
 ```json
 {
   "status": "healthy",
-  "timestamp": "2024-01-15T10:30:00.000000"
+  "timestamp": "2025-01-15T10:30:00.000000"
 }
 ```
 
@@ -91,8 +91,8 @@ GET /api/task/{task_id}
   "output": "Artificial intelligence is...",
   "tokens_used": 150,
   "cost": 0.0003,
-  "created_at": "2024-01-15T10:30:00.000000",
-  "completed_at": "2024-01-15T10:30:05.000000"
+  "created_at": "2025-01-15T10:30:00.000000",
+  "completed_at": "2025-01-15T10:30:05.000000"
 }
 ```
 
@@ -123,7 +123,7 @@ GET /api/tasks?status=completed&limit=10
       "id": 1,
       "status": "completed",
       "provider": "openai",
-      "created_at": "2024-01-15T10:30:00.000000"
+      "created_at": "2025-01-15T10:30:00.000000"
     }
   ]
 }
@@ -146,7 +146,7 @@ GET /api/report/{report_type}
 **Response:**
 ```json
 {
-  "date": "2024-01-15",
+  "date": "2025-01-15",
   "income": 150.00,
   "expenses": 45.50,
   "profit": 104.50,

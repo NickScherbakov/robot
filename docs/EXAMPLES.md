@@ -40,14 +40,14 @@ Bot: 🤖 Robot Status
 • Active: 20
 
 ✅ System: Online
-🕒 Time: 2024-01-15 10:30:00 UTC
+🕒 Time: 2025-01-15 10:30:00 UTC
 ```
 
 ### Owner Reports
 
 ```
 User: /report daily
-Bot: 📊 Daily Report - 2024-01-15
+Bot: 📊 Daily Report - 2025-01-15
 
 💰 Income: $150.00
 💸 Expenses: $45.50
@@ -323,8 +323,8 @@ generator = ReportGenerator(session)
 # Get custom date range
 from datetime import date
 
-summary = generator.get_daily_summary(date(2024, 1, 15))
-print(f"Income on 2024-01-15: ${summary['income']}")
+summary = generator.get_daily_summary(date(2025, 1, 15))
+print(f"Income on 2025-01-15: ${summary['income']}")
 
 # Get category breakdown
 breakdown = generator.get_category_breakdown(days=30)

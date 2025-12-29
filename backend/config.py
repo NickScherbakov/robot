@@ -35,6 +35,8 @@ class Config:
     # Reporting
     REPORT_TIME = os.getenv('REPORT_TIME', '09:00')
     TIMEZONE = os.getenv('TIMEZONE', 'UTC')
+    TRENDING_UPDATE_TIME = os.getenv('TRENDING_UPDATE_TIME', '03:00')
+    OPENROUTER_TREND_URL = os.getenv('OPENROUTER_TREND_URL', 'https://openrouter.ai/models?fmt=json&order=top-weekly')
     
     # Server
     HOST = os.getenv('HOST', '0.0.0.0')
