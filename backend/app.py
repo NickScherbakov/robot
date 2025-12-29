@@ -8,6 +8,8 @@ from backend.database import Database, User, Task, Transaction
 from backend.ai_providers import AIManager
 from billing.payment_processor import PaymentProcessor
 from billing.reporting import ReportGenerator
+from backend.optimizer_api import register_optimizer_api
+from backend.optimizer_middleware import get_optimizer_middleware
 from datetime import datetime
 import logging
 
@@ -20,6 +22,10 @@ app.config['SECRET_KEY'] = Config.SECRET_KEY
 # Initialize database
 db = Database(Config.DATABASE_PATH).initialize()
 ai_manager = AIManager()
+
+# Register Model Optimizer API
+register_optimizer_api(app)
+optimizer_middleware = get_optimizer_middleware()
 
 
 @app.route('/health', methods=['GET'])
@@ -86,6 +92,20 @@ def create_task():
             task.status = 'completed'
             task.completed_at = datetime.utcnow()
             session.commit()
+            
+            # Log usage to Model Optimizer
+            try:
+                optimizer_middleware.track_manual(
+                    provider=provider,
+                    model=result.get('model', 'unknown'),
+                    task_type=task.task_type,
+                    input_tokens=result.get('prompt_tokens', 0),
+                    output_tokens=result.get('completion_tokens', 0),
+                    latency_ms=result.get('latency_ms', 0),
+                    success=True
+                )
+            except Exception as e:
+                logger.warning(f"Failed to log usage to optimizer: {e}")
             
             # Record expense
             payment_processor = PaymentProcessor(session)

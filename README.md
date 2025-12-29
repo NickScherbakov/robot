@@ -76,6 +76,7 @@
 - **Smart Routing**: Automatic provider selection based on task
 - **Token Tracking**: Real-time usage and cost monitoring
 - **Response Caching**: Optimize costs with intelligent caching
+- **Model Optimizer**: AI cost optimization like Google Vertex AI
 
 ### 🎯 SelfEarnBot - NEW!
 
@@ -199,7 +200,10 @@ robot/
 │   ├── config.py        # Configuration management
 │   ├── database.py      # Database models and ORM
 │   ├── ai_providers.py  # AI API integrations
-│   └── scheduler.py     # Automated task scheduler
+│   ├── scheduler.py     # Automated task scheduler
+│   ├── model_optimizer.py      # 🆕 AI cost optimization engine
+│   ├── optimizer_api.py        # 🆕 Optimizer REST API
+│   └── optimizer_middleware.py # 🆕 Auto-tracking middleware
 ├── frontend/            # User interfaces
 │   └── telegram_bot.py  # Telegram bot interface
 ├── billing/             # Payment and financial logic
@@ -844,7 +848,7 @@ The robot automatically generates and sends comprehensive financial reports via 
 ### Report Example
 
 ```
-📊 Daily Financial Report - Dec 17, 2024
+📊 Daily Financial Report - Dec 17, 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📈 REVENUE
@@ -908,7 +912,7 @@ TELEGRAM_OWNER_ID=123456789
 ```env
 # OpenAI (Optional but recommended)
 OPENAI_API_KEY=sk-...
-OPENAI_MODEL=gpt-3.5-turbo  # or gpt-4
+OPENAI_MODEL=gpt-4o-mini  # or gpt-4o
 
 # Mistral AI (Optional)
 MISTRAL_API_KEY=...
@@ -1578,7 +1582,7 @@ The website features:
 
 ---
 
-**© 2024 Earning Robot | [MIT License](LICENSE) | [Code of Conduct](CODE_OF_CONDUCT.md) | [Contributing Guidelines](CONTRIBUTING.md)**
+**© 2025 Earning Robot | [MIT License](LICENSE) | [Code of Conduct](CODE_OF_CONDUCT.md) | [Contributing Guidelines](CONTRIBUTING.md)**
 
 Made with 🤖 and ☕
 

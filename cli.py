@@ -7,6 +7,7 @@ from backend.ai_providers import AIManager
 from backend.config import Config
 from billing.reporting import ReportGenerator
 from billing.payment_processor import PaymentProcessor
+from backend.model_optimizer import ModelOptimizer
 import sys
 
 
@@ -21,6 +22,9 @@ def show_menu():
     print("4. View Statistics")
     print("5. List Users")
     print("6. View Transactions")
+    print("7. 📊 Model Optimizer - Stats")
+    print("8. 💡 Model Optimizer - Recommendations")
+    print("9. 📝 Model Optimizer - Full Report")
     print("0. Exit")
     print("="*50)
 
@@ -185,6 +189,79 @@ def view_transactions(db):
     session.close()
 
 
+def view_optimizer_stats(optimizer):
+    """View Model Optimizer statistics"""
+    print("\n--- Model Optimizer Statistics ---")
+    days = input("Period in days [30]: ").strip() or "30"
+    
+    try:
+        days = int(days)
+        stats = optimizer.get_usage_stats(days)
+        
+        print(f"\n📊 Usage Statistics ({days} days)")
+        print(f"\nTotal Cost: ${stats['total_cost_usd']:.2f}")
+        print(f"Total Requests: {stats['total_requests']}")
+        print(f"Average Cost per Request: ${stats['average_cost_per_request']:.4f}")
+        
+        if stats['by_model']:
+            print("\n💰 Top Models by Cost:")
+            for i, model in enumerate(stats['by_model'][:5], 1):
+                print(f"  {i}. {model['model']}")
+                print(f"     Requests: {model['requests']} | Cost: ${model['cost_usd']:.2f}")
+                if model['avg_latency_ms']:
+                    print(f"     Avg Latency: {model['avg_latency_ms']:.0f}ms")
+        
+        if stats['by_task_type']:
+            print("\n📋 By Task Type:")
+            for task in stats['by_task_type']:
+                print(f"  {task['task_type']}: {task['requests']} requests, ${task['cost_usd']:.2f}")
+    
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+
+
+def view_optimizer_recommendations(optimizer):
+    """View optimization recommendations"""
+    print("\n--- Optimization Recommendations ---")
+    days = input("Period in days [30]: ").strip() or "30"
+    
+    try:
+        days = int(days)
+        recommendations = optimizer.analyze_and_recommend(days)
+        
+        if not recommendations:
+            print("\n✅ No recommendations - current usage is already optimal!")
+            return
+        
+        total_savings = sum(r.estimated_savings_usd_monthly for r in recommendations)
+        print(f"\n💡 Found {len(recommendations)} optimization opportunities")
+        print(f"💰 Total Potential Savings: ${total_savings:.2f}/month")
+        
+        for i, rec in enumerate(recommendations, 1):
+            print(f"\n{i}. {rec.current_model} → {rec.recommended_model}")
+            print(f"   Savings: {rec.estimated_savings_percent:.1f}% (${rec.estimated_savings_usd_monthly:.2f}/mo)")
+            print(f"   Quality Impact: {rec.quality_impact}")
+            print(f"   Reason: {rec.reason}")
+            print(f"   Confidence: {rec.confidence:.0%}")
+    
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+
+
+def view_optimizer_report(optimizer):
+    """View full optimization report"""
+    print("\n--- Full Optimization Report ---")
+    days = input("Period in days [30]: ").strip() or "30"
+    
+    try:
+        days = int(days)
+        report = optimizer.generate_optimization_report(days)
+        print(report)
+    
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+
+
 def main():
     """Main CLI loop"""
     print("\n🤖 Initializing Earning Robot CLI...")
@@ -192,6 +269,7 @@ def main():
     # Initialize database
     db = Database(Config.DATABASE_PATH).initialize()
     ai_manager = AIManager()
+    optimizer = ModelOptimizer()
     
     print("✅ Ready!")
     
@@ -214,6 +292,12 @@ def main():
             list_users(db)
         elif choice == '6':
             view_transactions(db)
+        elif choice == '7':
+            view_optimizer_stats(optimizer)
+        elif choice == '8':
+            view_optimizer_recommendations(optimizer)
+        elif choice == '9':
+            view_optimizer_report(optimizer)
         else:
             print("\n❌ Invalid option. Please try again.")
     
